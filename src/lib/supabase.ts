@@ -16,7 +16,7 @@ const request = async (path: string, options: RequestInit = {}) => {
     const response = await fetch(`${apiBase}/api/${path}`, { ...options, headers });
     const contentType = response.headers.get('content-type') ?? '';
     const body = contentType.includes('application/json') ? await response.json() : {};
-    if (!response.ok) return { data: body, error: { message: body.error ?? `API request failed (${response.status}).` } };
+    if (!response.ok) return { data: body, error: { message: body.error ?? (response.status === 404 ? 'The Postgres API route is unavailable. Start the app with the worker API or deploy the worker.' : `API request failed (${response.status}).`) } };
     return { data: body, error: null };
   } catch {
     return { data: {}, error: { message: 'Unable to reach the Postgres API. Start the worker preview or deploy the worker before signing in.' } };
