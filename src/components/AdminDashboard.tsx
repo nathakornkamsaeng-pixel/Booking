@@ -286,7 +286,7 @@ function AdminHeader({
 }) {
   return (
     <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-3 py-2.5 sm:px-4 sm:py-3">
         <div className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-600 text-white">
             <CalendarDays className="h-5 w-5" />
@@ -296,7 +296,7 @@ function AdminHeader({
             <span className="block text-xs text-slate-500">{displayName}</span>
           </div>
         </div>
-        <div className="flex items-center gap-1 rounded-xl bg-slate-100 p-1">
+        <div className="order-3 flex w-full items-center justify-center gap-1 rounded-xl bg-slate-100 p-1 sm:order-none sm:w-auto">
           <button
             onClick={() => onTabChange('calendar')}
             className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition ${
@@ -317,15 +317,17 @@ function AdminHeader({
         <div className="flex items-center gap-1">
           <button
             onClick={onChangePassword}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition"
+            aria-label="Change password"
+            className="flex min-h-10 items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition sm:px-3"
           >
-            <KeyRound className="h-4 w-4" /> Change password
+            <KeyRound className="h-4 w-4" /> <span className="hidden sm:inline">Change password</span>
           </button>
           <button
             onClick={onSignOut}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition"
+            aria-label="Sign out"
+            className="flex min-h-10 items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition sm:px-3"
           >
-            <LogOut className="h-4 w-4" /> Sign out
+            <LogOut className="h-4 w-4" /> <span className="hidden sm:inline">Sign out</span>
           </button>
         </div>
       </div>
@@ -417,8 +419,8 @@ function StudentsPanel({
           <p className="text-sm text-slate-500">No students yet. Create one to get started.</p>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <table className="w-full text-left text-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <table className="min-w-[720px] w-full text-left text-sm">
             <thead className="border-b border-slate-200 bg-slate-50/60 text-xs uppercase tracking-wide text-slate-500">
               <tr>
                 <th className="px-4 py-3 font-semibold">Name</th>
@@ -491,7 +493,7 @@ function CreateSlotModal({
   return (
     <Modal title="Add available time" onClose={onClose}>
       <form onSubmit={submit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <label className="block">
             <span className="text-xs font-medium text-slate-600">Start</span>
             <input

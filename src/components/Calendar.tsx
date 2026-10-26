@@ -39,7 +39,7 @@ export function Calendar({ weekStart, slots, onPrev, onNext, onToday, onSlotClic
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-      <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 px-3 py-2.5 sm:px-4 sm:py-3">
         <div className="flex items-center gap-2">
           <button
             onClick={onPrev}
@@ -62,7 +62,7 @@ export function Calendar({ weekStart, slots, onPrev, onNext, onToday, onSlotClic
             Today
           </button>
         </div>
-        <h2 className="text-base font-semibold text-slate-800">
+        <h2 className="w-full text-center text-sm font-semibold text-slate-800 sm:w-auto sm:text-base">
           {formatDateLabel(days[0])} – {formatDateLabel(days[6])}
         </h2>
       </div>
