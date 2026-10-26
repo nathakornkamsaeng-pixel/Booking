@@ -103,7 +103,7 @@ export function StudentDashboard() {
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-3 py-2.5 sm:px-4 sm:py-3">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-600 text-white">
               <CalendarDays className="h-5 w-5" />
@@ -115,18 +115,20 @@ export function StudentDashboard() {
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex w-full items-center justify-end gap-1 sm:w-auto">
             <button
               onClick={() => setShowChangePassword(true)}
-              className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition"
+              aria-label="Change password"
+              className="flex min-h-10 items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition sm:px-3"
             >
-              <KeyRound className="h-4 w-4" /> Change password
+              <KeyRound className="h-4 w-4" /> <span className="hidden sm:inline">Change password</span>
             </button>
             <button
               onClick={signOut}
-              className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition"
+              aria-label="Sign out"
+              className="flex min-h-10 items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 transition sm:px-3"
             >
-              <LogOut className="h-4 w-4" /> Sign out
+              <LogOut className="h-4 w-4" /> <span className="hidden sm:inline">Sign out</span>
             </button>
           </div>
         </div>
