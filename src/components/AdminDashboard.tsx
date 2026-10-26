@@ -82,7 +82,9 @@ export function AdminDashboard() {
   }, [slots, bookings, students]);
 
   async function handleCreateSlot(start: Date, end: Date) {
+    if (!profile?.id) return;
     const { error } = await supabase.from('time_slots').insert({
+      admin_id: profile.id,
       start_at: start.toISOString(),
       end_at: end.toISOString(),
       status: 'open',
