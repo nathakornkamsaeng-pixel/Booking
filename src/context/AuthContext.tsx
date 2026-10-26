@@ -61,15 +61,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .eq('id', userId)
       .maybeSingle();
     if (error) {
-      console.error('Failed to load profile:', error.message);
-      return;
+      console.error('[v0] Failed to load profile:', error.message);
+      setProfile(null);
+      return false;
     }
     setProfile(data as Profile | null);
+    return Boolean(data);
   }
 
   async function signIn(email: string, password: string) {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error ? error.message : null };
+    const normalizedEmail = email.trim().toLowerCase();
+    const { error } = await supabase.auth.signInWithPassword({
+      email: normalizedEmail,
+      password,
+    });
+    if (!error) return { error: null };
+    if (error.message.toLowerCase().includes('database error querying schema')) {
+      console.error('[v0] Supabase Auth schema error:', error);
+      return { error: 'The authentication service is unavailable. Please contact your administrator.' };
+    }
+    return { error: error.message };
   }
 
   async function signOut() {

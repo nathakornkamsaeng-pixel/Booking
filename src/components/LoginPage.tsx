@@ -12,10 +12,8 @@ export function LoginPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const queryEmail = params.get('email');
-    const queryPassword = params.get('password');
     if (queryEmail) setEmail(queryEmail);
-    if (queryPassword) setPassword(queryPassword);
-    if (queryEmail || queryPassword) {
+    if (queryEmail) {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
