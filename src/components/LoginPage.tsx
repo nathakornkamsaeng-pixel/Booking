@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CalendarDays, LogIn } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -8,6 +8,17 @@ export function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const queryEmail = params.get('email');
+    const queryPassword = params.get('password');
+    if (queryEmail) setEmail(queryEmail);
+    if (queryPassword) setPassword(queryPassword);
+    if (queryEmail || queryPassword) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
