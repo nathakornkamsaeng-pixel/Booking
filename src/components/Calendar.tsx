@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { addDays, formatDayLabel, formatDateLabel, sameDay, startOfWeek } from '@/lib/datetime';
+import { addDays, formatDayLabel, formatDateLabel, sameDay } from '@/lib/datetime';
 
 export interface CalendarSlot {
   id: string;

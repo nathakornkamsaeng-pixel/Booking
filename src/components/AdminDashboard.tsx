@@ -3,7 +3,7 @@ import {
   CalendarDays, Plus, Trash2, UserPlus, Check, X, Clock, Users, LogOut, KeyRound,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
-import { supabase, type Profile, type TimeSlot, type Booking } from '@/lib/supabase';
+import { supabase, type TimeSlot, type Booking } from '@/lib/supabase';
 import {
   addDays, formatFullDate, formatTimeRange, fromLocalDatetimeInput,
   startOfWeek, toLocalDatetimeInput,
@@ -115,10 +115,6 @@ export function AdminDashboard() {
       alert(error.message);
       return;
     }
-    const booking = bookings.find((b) => b.id === bookingId);
-    if (booking) {
-      await supabase.from('time_slots').update({ status: 'booked' }).eq('id', booking.slot_id);
-    }
     setSelectedSlot(null);
     await loadData();
   }
@@ -132,10 +128,6 @@ export function AdminDashboard() {
     if (error) {
       alert(error.message);
       return;
-    }
-    const booking = bookings.find((b) => b.id === bookingId);
-    if (booking) {
-      await supabase.from('time_slots').update({ status: 'open' }).eq('id', booking.slot_id);
     }
     setSelectedSlot(null);
     await loadData();

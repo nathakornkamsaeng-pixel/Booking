@@ -64,12 +64,11 @@ export function StudentDashboard() {
       alert(error.message);
       return;
     }
-    await supabase.from('time_slots').update({ status: 'booked' }).eq('id', slotId);
     setSelectedSlot(null);
     await loadData();
   }
 
-  async function handleCancelBooking(bookingId: string, slotId: string) {
+  async function handleCancelBooking(bookingId: string) {
     if (!confirm('Cancel this booking?')) return;
     const { error } = await supabase
       .from('bookings')
@@ -79,7 +78,6 @@ export function StudentDashboard() {
       alert(error.message);
       return;
     }
-    await supabase.from('time_slots').update({ status: 'open' }).eq('id', slotId);
     setSelectedSlot(null);
     await loadData();
   }
@@ -176,7 +174,7 @@ export function StudentDashboard() {
                   <div className="flex items-center gap-2">
                     <BookingBadge status={b.status} />
                     <button
-                      onClick={() => handleCancelBooking(b.id, b.slot_id)}
+                      onClick={() => handleCancelBooking(b.id)}
                       className="flex items-center gap-1 rounded-lg border border-rose-200 px-2.5 py-1 text-xs font-semibold text-rose-700 hover:bg-rose-50"
                     >
                       <X className="h-3.5 w-3.5" /> Cancel
@@ -197,7 +195,7 @@ export function StudentDashboard() {
           onBook={(note) => handleBook(selectedSlotFull.slot.id, note)}
           onCancel={() =>
             selectedSlotFull.myBooking &&
-            handleCancelBooking(selectedSlotFull.myBooking.id, selectedSlotFull.slot.id)
+            handleCancelBooking(selectedSlotFull.myBooking.id)
           }
         />
       )}
