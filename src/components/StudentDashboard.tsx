@@ -55,8 +55,10 @@ export function StudentDashboard() {
   }, [slots, myBookings]);
 
   async function handleBook(slotId: string, note: string) {
+    if (!profile?.id) return;
     const { error } = await supabase.from('bookings').insert({
       slot_id: slotId,
+      student_id: profile.id,
       status: 'pending',
       note: note || null,
     });
